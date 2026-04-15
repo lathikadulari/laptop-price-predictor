@@ -4,12 +4,9 @@ import numpy as np
 import os 
 app = Flask(__name__)
 
-import os # Make sure this is at the very top of your file!
-
-import os
 
 def prediction(lst):
-    # This ensures Vercel finds the file regardless of where it's running
+    # This finds the absolute path to your current folder
     base_path = os.path.dirname(__file__)
     filename = os.path.join(base_path, 'model', 'predictor.pickle')
     
