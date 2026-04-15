@@ -5,14 +5,17 @@ import os
 app = Flask(__name__)
 
 
+# Global variable to cache the model
+_model = None
+
 def prediction(lst):
-    # This finds the absolute path to your current folder
-    base_path = os.path.dirname(__file__)
-    filename = os.path.join(base_path, 'model', 'predictor.pickle')
-    
-    with open(filename, 'rb') as file:
-        model = pickle.load(file)
-    return model.predict([lst])
+    global _model
+    if _model is None:
+        base_path = os.path.dirname(__file__)
+        filename = os.path.join(base_path, 'model', 'predictor.pickle')
+        with open(filename, 'rb') as file:
+            _model = pickle.load(file)
+    return _model.predict([lst])
 
 
 @app.route('/', methods=['POST', 'GET'])
