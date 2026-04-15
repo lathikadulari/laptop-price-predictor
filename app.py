@@ -69,3 +69,6 @@ def index():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+# MOVE THIS OUTSIDE: It must be at the very edge of the left margin
+app = app
