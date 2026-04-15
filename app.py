@@ -6,15 +6,16 @@ app = Flask(__name__)
 
 import os # Make sure this is at the very top of your file!
 
+import os
+
 def prediction(lst):
-    # Use this to find the absolute path to your model
+    # This ensures Vercel finds the file regardless of where it's running
     base_path = os.path.dirname(__file__)
     filename = os.path.join(base_path, 'model', 'predictor.pickle')
     
     with open(filename, 'rb') as file:
         model = pickle.load(file)
-    pred_value = model.predict([lst])
-    return pred_value
+    return model.predict([lst])
 
 
 @app.route('/', methods=['POST', 'GET'])
